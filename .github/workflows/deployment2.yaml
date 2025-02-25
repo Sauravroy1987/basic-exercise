@@ -3,7 +3,7 @@ on: push
 jobs:
   lint:
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - name: Get code
         uses: actions/checkout@v3
       - name: Install dependencies
@@ -11,9 +11,9 @@ jobs:
       - name: Lint
         run: npm run lint
   test:
-    needs: lint
+    needs: lint #lint job has to complete successfully, then test job will trigger
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - name: Get code
         uses: actions/checkout@v3
       - name: Install dependencies
@@ -21,7 +21,7 @@ jobs:
       - name: Test code
         run: npm run test
   deploy:
-    needs: test
+    needs: test #test job has to complete successfully, then deploy job will trigger
     runs-on: ubuntu-latest
     steps:
       - name: Get code
